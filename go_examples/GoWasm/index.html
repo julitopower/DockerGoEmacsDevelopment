@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <p>Wasm example</p>
+    <input name="input_1" id="in1" value="10" oninput="add('in1', 'in2', 'result')">
+    <input name="input_2" id="in2" value="20" oninput="add('in1', 'in2', 'result')">
+    <input name="example_input" id="result">
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+      go.run(result.instance);
+      add("in1", "in2", "result")
+      });
+    </script>
+  </body>
+</html>
