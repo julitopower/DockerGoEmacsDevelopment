@@ -22,12 +22,11 @@ RUN mkdir -p $HOME/staging/ && cd ~/staging/ &&                  \
     mkdir -p $HOME/go/src $HOME/go/pkg/ $HOME/go/bin/
 
 ENV GOPATH "/home/golang/go"
-RUN echo $GOPATH && ls $GOPATH
 ENV PATH $PATH:/usr/local/go/bin:$GOPATH/bin/
 
 # Copy .emacs and Go test program
 COPY emacs_config /home/golang/
-COPY go_example ${GOPATH}/src/
+COPY go_examples ${GOPATH}/src/
 RUN sudo chown golang:golang /home/golang -R
 
 # Install go packages to support Emacs development
